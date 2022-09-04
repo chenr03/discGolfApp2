@@ -4,8 +4,8 @@ let innovaBag3 = [];
 let getDiscBag3 =
 
     function(request, response){
-        console.log ("GET /discs");
-        response.json("from GET /discs")
+        console.log ("GET /discs3");
+        response.json("from GET /discs3")
 
     };
 
@@ -13,17 +13,17 @@ let getDiscBag3 =
 let getSingleDisc3 =
 
     function(request, response){
-        console.log ("GET /discs");
+        console.log ("GET /discs3");
 
 
-        let myDiscId = request.params.id
+        let myDiscId3 = request.params.id
 
-        let matchingDisc = innovaBag3.find(function(disc, index){
-            return disc.id === myDiscId;
+        let matchingDisc3 = innovaBag3.find(function(disc, index){
+            return disc.id === myDiscId3;
         })
 
-        if(matchingDisc){
-            response.json(matchingDisc)
+        if(matchingDisc3){
+            response.json(matchingDisc3)
         } else {
             response.json(undefined);
         }
@@ -33,56 +33,56 @@ let getSingleDisc3 =
 let createDisc3 =
 
     function(request, response){
-        console.log ("POST /discs");
+        console.log ("POST /discs3");
 
 
-        let description = request.body.description;
-        let myDiscId = getRandomNum();
-        let completed = false;
+        let description3 = request.body.description;
+        let myDiscId3 = getRandomNum();
+        let completed3 = false;
 
         // read the description from the request body,
         //and create a new disc item, with the description
         // and use a random number from the id - using the math.random, and math.floor function
 
-        let newDisc = {};
-        newDisc.description = description;
-        newDisc.id = myDiscId;
-        newDisc.completed = completed;
+        let newDisc3 = {};
+        newDisc3.description = description3;
+        newDisc3.id = myDiscId3;
+        newDisc3.completed = completed3;
 
         // add the new disc item to the bag array
 
-        innovaBag3.push(newDisc);
+        innovaBag3.push(newDisc3);
 
         // return the new Disc on the response
 
-        response.json(newDisc);
+        response.json(newDisc3);
     };
 
 //4
 let deleteDisc3 =
 
     function(request, response){
-        console.log ("DELETE /discs");
+        console.log ("DELETE /discs3");
 
 
         // find the id of the disc we want to delete
-        let myDiscId = request.params.id;
+        let myDiscId3 = request.params.id;
 
         // we need to remove this disc from our "Innova" Bag array
         // there are a lot of ways to do this
         // Again I am choosing to use .find, to find the disc, and then .splice to remove it from the
         //Innova Bag array
 
-        let matchingIndex = innovaBag3.find(function(disc, index){
-            return disc.id === myDiscId;
+        let matchingIndex3 = innovaBag3.find(function(disc3, index){
+            return disc3.id === myDiscId3;
         })
 
         // if the index is less than 0, that means there was not a match to the id in the innova bag array
-        if(matchingIndex < 0){
+        if(matchingIndex3 < 0){
             response.json(undefined);
         } else {
-            let deletedDisc = innovaBag3.splice(matchingIndex, 1)
-            response.json(deletedDisc)
+            let deletedDisc3 = innovaBag3.splice(matchingIndex3, 1)
+            response.json(deletedDisc3)
         }
     };
 
@@ -90,32 +90,32 @@ let deleteDisc3 =
 let updateDisc3 =
 
     function(request, response){
-        console.log ("PUT /discs");
+        console.log ("PUT /discs3");
 
 
         // get the id to update from the route
-        let myDiscId = request.params.id;
+        let myDiscId3 = request.params.id;
 
         // get the new description from the body
-        let description = request.body.description;
+        let description3 = request.body.description;
 
         // get the new completed flag from the body
-        let completed = request.body.completed;
+        let completed3 = request.body.completed;
 
         //we need to get the disc item we want to update from the innova bag array
 
-        let matchingDisc = innovaBag3.find(function(disc, index){
-            return disc.id == myDiscId
+        let matchingDisc3 = innovaBag3.find(function(disc3, index){
+            return disc3.id == myDiscId3
         });
 
         // if we found a matching disc in the bag, update it
         // and return the updated item in the response
         // if not return undefined exclusively as previously explained.
 
-        if(matchingDisc){
-            matchingDisc.description = description;
-            matchingDisc.completed = completed;
-            response.json(matchingDisc);
+        if(matchingDisc3){
+            matchingDisc3.description = description3;
+            matchingDisc3.completed = completed3;
+            response.json(matchingDisc3);
         } else {
             response.json(undefined);
         }
