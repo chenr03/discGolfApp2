@@ -4,7 +4,7 @@ const innovaBag = [];
 let getDiscBag =
 
     function(request, response){
-        console.log ("GET /discs");
+        // console.log ("GET /discs");
         response.json("from GET /discs")
 
     };
@@ -13,7 +13,7 @@ let getDiscBag =
 let getSingleDisc =
 
     function(request, response){
-        console.log ("GET /discs");
+        // console.log ("GET /discs");
         response.json("from GET /discs")
 
         let myDiscId = request.params.id
@@ -33,7 +33,7 @@ let getSingleDisc =
 let createDisc =
 
     function(request, response){
-        console.log ("POST /discs");
+        // console.log ("POST /discs");
         response.json("from POST /discs")
 
         let description = request.body.description;
@@ -62,7 +62,7 @@ let createDisc =
 let deleteDisc =
 
     function(request, response){
-        console.log ("DELETE /discs");
+        // console.log ("DELETE /discs");
         response.json("from DELETE /discs")
 
         // find the id of the disc we want to delete
@@ -90,7 +90,7 @@ let deleteDisc =
 let updateDisc =
 
     function(request, response){
-        console.log ("PUT /discs");
+        // console.log ("PUT /discs");
         response.json("from GET /discs")
 
         // get the id to update from the route
