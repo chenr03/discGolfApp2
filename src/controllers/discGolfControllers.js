@@ -1,4 +1,4 @@
-let innovaBag = [];
+const innovaBag = [];
 
 //1
 let getDiscBag =
