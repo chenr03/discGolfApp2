@@ -18,12 +18,12 @@ discGolfApp.use(player_1_Routes);
 let player_2_Routes = require("./routes/player_2_Routes.js");
 discGolfApp.use(player_2_Routes);
 
-let player_3_Routes = require("./routes/player_3_Routes");
+let player_3_Routes = require("./routes/player_3_Routes.js");
 discGolfApp.use(player_3_Routes);
 
-// console.log(player_1_DiscGolfRoutes
-// console.log(player_2_DiscGolfRoutes
-// console.log(player_3_DiscGolfRoutes
+// console.log(player_1_Routes)
+// console.log(player_2_Routes)
+// console.log(player_3_Routes)
 
 
 discGolfApp.listen(PORT, function(){

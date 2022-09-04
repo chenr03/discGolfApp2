@@ -2,7 +2,7 @@ let express = require('express');
 
 let routes = express.Router()
 
-let Player_3 = require("../players/Player_3");
+let Player_3 = require("../Players/Player_3");
 
 
 routes.get("/discs3", Player_3.getDiscBag3)
