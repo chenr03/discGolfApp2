@@ -4,7 +4,7 @@ const innovaBag = [];
 let getDiscBag =
 
     function(request, response){
-        // console.log ("GET /discs");
+        console.log ("GET /discs");
         response.json("from GET /discs")
 
     };
@@ -13,8 +13,8 @@ let getDiscBag =
 let getSingleDisc =
 
     function(request, response){
-        // console.log ("GET /discs");
-        response.json("from GET /discs")
+        console.log ("GET /discs");
+
 
         let myDiscId = request.params.id
 
@@ -33,8 +33,8 @@ let getSingleDisc =
 let createDisc =
 
     function(request, response){
-        // console.log ("POST /discs");
-        response.json("from POST /discs")
+        console.log ("POST /discs");
+
 
         let description = request.body.description;
         let myDiscId = getRandomNum();
@@ -62,8 +62,8 @@ let createDisc =
 let deleteDisc =
 
     function(request, response){
-        // console.log ("DELETE /discs");
-        response.json("from DELETE /discs")
+        console.log ("DELETE /discs");
+
 
         // find the id of the disc we want to delete
         let myDiscId = request.params.id;
@@ -90,8 +90,8 @@ let deleteDisc =
 let updateDisc =
 
     function(request, response){
-        // console.log ("PUT /discs");
-        response.json("from GET /discs")
+        console.log ("PUT /discs");
+
 
         // get the id to update from the route
         let myDiscId = request.params.id;
@@ -105,7 +105,7 @@ let updateDisc =
         //we need to get the disc item we want to update from the innova bag array
 
         let matchingDisc = innovaBag.find(function(disc, index){
-            return disc.id === myDiscId
+            return disc.id == myDiscId
         });
 
         // if we found a matching disc in the bag, update it
