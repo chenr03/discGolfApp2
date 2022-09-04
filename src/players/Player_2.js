@@ -1,7 +1,7 @@
-const innovaBag = [];
+let innovaBag2 = [];
 
 //1
-let getDiscBag =
+let getDiscBag2 =
 
     function(request, response){
         console.log ("GET /discs");
@@ -10,7 +10,7 @@ let getDiscBag =
     };
 
 //2
-let getSingleDisc =
+let getSingleDisc2 =
 
     function(request, response){
         console.log ("GET /discs");
@@ -18,7 +18,7 @@ let getSingleDisc =
 
         let myDiscId = request.params.id
 
-        let matchingDisc = innovaBag.find(function(disc, index){
+        let matchingDisc = innovaBag2.find(function(disc, index){
             return disc.id === myDiscId;
         })
 
@@ -30,7 +30,7 @@ let getSingleDisc =
     };
 
 //3
-let createDisc =
+let createDisc2 =
 
     function(request, response){
         console.log ("POST /discs");
@@ -51,7 +51,7 @@ let createDisc =
 
         // add the new disc item to the bag array
 
-        innovaBag.push(newDisc);
+        innovaBag2.push(newDisc);
 
         // return the new Disc on the response
 
@@ -59,7 +59,7 @@ let createDisc =
     };
 
 //4
-let deleteDisc =
+let deleteDisc2 =
 
     function(request, response){
         console.log ("DELETE /discs");
@@ -73,7 +73,7 @@ let deleteDisc =
         // Again I am choosing to use .find, to find the disc, and then .splice to remove it from the
         //Innova Bag array
 
-        let matchingIndex = innovaBag.find(function(disc, index){
+        let matchingIndex = innovaBag2.find(function(disc, index){
             return disc.id === myDiscId;
         })
 
@@ -81,13 +81,13 @@ let deleteDisc =
         if(matchingIndex < 0){
             response.json(undefined);
         } else {
-            let deletedDisc = innovaBag.splice(matchingIndex, 1)
+            let deletedDisc = innovaBag2.splice(matchingIndex, 1)
             response.json(deletedDisc)
         }
     };
 
 //5
-let updateDisc =
+let updateDisc2 =
 
     function(request, response){
         console.log ("PUT /discs");
@@ -104,7 +104,7 @@ let updateDisc =
 
         //we need to get the disc item we want to update from the innova bag array
 
-        let matchingDisc = innovaBag.find(function(disc, index){
+        let matchingDisc = innovaBag2.find(function(disc, index){
             return disc.id == myDiscId
         });
 
@@ -134,4 +134,4 @@ let getRandomNum = function(){
     return randomNum.toString();
 }
 
-module.exports = {getDiscBag, getSingleDisc, createDisc, deleteDisc, updateDisc};
+module.exports = {getDiscBag2, getSingleDisc2, createDisc2, deleteDisc2, updateDisc2};
