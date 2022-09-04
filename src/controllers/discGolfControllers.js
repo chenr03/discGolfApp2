@@ -5,7 +5,7 @@ let getDiscBag =
 
     function(request, response){
         console.log ("GET /discs");
-        response.send("from GET /discs")
+        response.json("from GET /discs")
 
     };
 
@@ -14,7 +14,7 @@ let getSingleDisc =
 
     function(request, response){
         console.log ("GET /discs");
-        response.send("from GET /discs")
+        response.json("from GET /discs")
 
         let myDiscId = request.params.id
 
@@ -34,7 +34,7 @@ let createDisc =
 
     function(request, response){
         console.log ("POST /discs");
-        response.send("from POST /discs")
+        response.json("from POST /discs")
 
         let description = request.body.description;
         let myDiscId = getRandomNum();
@@ -63,7 +63,7 @@ let deleteDisc =
 
     function(request, response){
         console.log ("DELETE /discs");
-        response.send("from DELETE /discs")
+        response.json("from DELETE /discs")
 
         // find the id of the disc we want to delete
         let myDiscId = request.params.id;
@@ -91,7 +91,7 @@ let updateDisc =
 
     function(request, response){
         console.log ("PUT /discs");
-        response.send("from GET /discs")
+        response.json("from GET /discs")
 
         // get the id to update from the route
         let myDiscId = request.params.id;
