@@ -1,0 +1,9 @@
+{
+    "name": "discGolfApp2",
+    "scripts": {
+    "start": "node src/main.js"
+},
+    "dependencies": {
+    "express": "4.18.1"
+}
+}
