@@ -136,7 +136,6 @@ let updateDisc2 =
 
     };
 
-
 // this function will return a random number
 // between 0 and 1000
 // this function comes into play with all functions, but is especially key in the delete function.
@@ -146,6 +145,6 @@ let getRandomNum2 = function(){
     let bigRandomFloat = randomFloat * 1000;
     let randomNum = Math.floor(bigRandomFloat);
     return randomNum.toString();
-}
+};
 
 module.exports = {getDiscBag2, getSingleDisc2, createDisc2, deleteDisc2, updateDisc2};
