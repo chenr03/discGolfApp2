@@ -3,6 +3,8 @@ let express = require('express');
 let Routes = express.Router()
 
 let Player_2 = require("../Players/Player_2");
+// changed controllers folder to Players so that it makes more sense for me,
+// leaving this here so that it makes more sense for others
 
 
 Routes.get("/discs2", Player_2.getDiscBag2)
