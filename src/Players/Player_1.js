@@ -39,6 +39,7 @@ let createDisc1 =
         let description1 = request.body.description;
         let myDiscId1 = getRandomNum1();
         let completed1 = false;
+        let color1 = request.body.color;
 
         // read the description from the request body,
         //and create a new disc item, with the description
@@ -48,6 +49,7 @@ let createDisc1 =
         newDisc1.description = description1;
         newDisc1.id = myDiscId1;
         newDisc1.completed = completed1;
+        newDisc1.color = color1
 
         // add the new disc item to the bag array
 
