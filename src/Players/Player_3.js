@@ -18,8 +18,8 @@ let getSingleDisc3 =
 
         let myDiscId3 = request.params.id
 
-        let matchingDisc3 = innovaBag3.find(function(disc, index){
-            return disc.id === myDiscId3;
+        let matchingDisc3 = innovaBag3.find(function(disc3, index){
+            return disc3.id == myDiscId3;
         })
 
         if(matchingDisc3){
@@ -37,7 +37,7 @@ let createDisc3 =
 
 
         let description3 = request.body.description;
-        let myDiscId3 = getRandomNum();
+        let myDiscId3 = getRandomNum3();
         let completed3 = false;
 
         // read the description from the request body,
@@ -127,7 +127,7 @@ let updateDisc3 =
 // between 0 and 1000
 // this function comes into play with all functions, but is especially key in the delete function.
 
-let getRandomNum = function(){
+let getRandomNum3 = function(){
     let randomFloat = Math.random();
     let bigRandomFloat = randomFloat * 1000;
     let randomNum = Math.floor(bigRandomFloat);

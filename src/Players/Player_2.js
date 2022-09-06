@@ -19,7 +19,7 @@ let getSingleDisc2 =
         let myDiscId2 = request.params.id
 
         let matchingDisc2 = innovaBag2.find(function(disc2, index){
-            return disc2.id === myDiscId2;
+            return disc2.id == myDiscId2;
         })
 
         if(matchingDisc2){
@@ -37,7 +37,7 @@ let createDisc2 =
 
 
         let description2 = request.body.description;
-        let myDiscId2 = getRandomNum();
+        let myDiscId2 = getRandomNum2();
         let completed2 = false;
 
         // read the description from the request body,
@@ -74,7 +74,7 @@ let deleteDisc2 =
         //Innova Bag array
 
         let matchingIndex2 = innovaBag2.find(function(disc2, index){
-            return disc2.id === myDiscId2;
+            return disc2.id == myDiscId2;
         })
 
         // if the index is less than 0, that means there was not a match to the id in the innova bag array
@@ -127,7 +127,7 @@ let updateDisc2 =
 // between 0 and 1000
 // this function comes into play with all functions, but is especially key in the delete function.
 
-let getRandomNum = function(){
+let getRandomNum2 = function(){
     let randomFloat = Math.random();
     let bigRandomFloat = randomFloat * 1000;
     let randomNum = Math.floor(bigRandomFloat);

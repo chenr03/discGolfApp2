@@ -19,7 +19,7 @@ let getSingleDisc1 =
         let myDiscId1 = request.params.id
 
         let matchingDisc1 = innovaBag1.find(function(disc1, index){
-            return disc1.id === myDiscId1;
+            return disc1.id == myDiscId1;
         })
 
         if(matchingDisc1){
@@ -33,21 +33,21 @@ let getSingleDisc1 =
 let createDisc1 =
 
     function(request, response){
-        console.log ("POST /discs");
+        console.log ("POST /discs1");
 
 
-        let description = request.body.description;
-        let myDiscId1 = getRandomNum();
-        let completed = false;
+        let description1 = request.body.description;
+        let myDiscId1 = getRandomNum1();
+        let completed1 = false;
 
         // read the description from the request body,
         //and create a new disc item, with the description
         // and use a random number from the id - using the math.random, and math.floor function
 
         let newDisc1 = {};
-        newDisc1.description = description;
+        newDisc1.description = description1;
         newDisc1.id = myDiscId1;
-        newDisc1.completed = completed;
+        newDisc1.completed = completed1;
 
         // add the new disc item to the bag array
 
@@ -74,7 +74,7 @@ let deleteDisc1 =
         //Innova Bag array
 
         let matchingIndex1 = innovaBag1.find(function(disc1, index){
-            return disc1.id === myDiscId;
+            return disc1.id == myDiscId;
         })
 
         // if the index is less than 0, that means there was not a match to the id in the innova bag array
@@ -97,10 +97,10 @@ let updateDisc1 =
         let myDiscId1 = request.params.id;
 
         // get the new description from the body
-        let description = request.body.description;
+        let description1 = request.body.description;
 
         // get the new completed flag from the body
-        let completed = request.body.completed;
+        let completed1 = request.body.completed;
 
         //we need to get the disc item we want to update from the innova bag array
 
@@ -113,8 +113,8 @@ let updateDisc1 =
         // if not return undefined exclusively as previously explained.
 
         if(matchingDisc1){
-            matchingDisc1.description = description;
-            matchingDisc1.completed = completed;
+            matchingDisc1.description = description1;
+            matchingDisc1.completed = completed1;
             response.json(matchingDisc1);
         } else {
             response.json(undefined);
@@ -127,7 +127,7 @@ let updateDisc1 =
 // between 0 and 1000
 // this function comes into play with all functions, but is especially key in the delete function.
 
-let getRandomNum = function(){
+let getRandomNum1 = function(){
     let randomFloat = Math.random();
     let bigRandomFloat = randomFloat * 1000;
     let randomNum = Math.floor(bigRandomFloat);
