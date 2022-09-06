@@ -5,7 +5,8 @@ let getDiscBag2 =
 
     function(request, response){
         console.log ("GET /discs2");
-        response.json("from GET /discs2")
+        response.json(innovaBag2)
+        //pulling array into body for user
 
     };
 
@@ -19,7 +20,7 @@ let getSingleDisc2 =
         let myDiscId2 = request.params.id
 
         let matchingDisc2 = innovaBag2.find(function(disc2, index){
-            return disc2.id == myDiscId2;
+            return disc2.id === myDiscId2;
         })
 
         if(matchingDisc2){

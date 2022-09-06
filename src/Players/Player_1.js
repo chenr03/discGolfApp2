@@ -5,7 +5,8 @@ let getDiscBag1 =
 
     function(request, response){
         console.log ("GET /discs1");
-        response.json("from GET /discs1")
+        response.json(innovaBag1)
+        // lets user see what's inside the innovaBag1 array
 
     };
 
@@ -19,7 +20,7 @@ let getSingleDisc1 =
         let myDiscId1 = request.params.id
 
         let matchingDisc1 = innovaBag1.find(function(disc1, index){
-            return disc1.id == myDiscId1;
+            return disc1.id === myDiscId1;
         })
 
         if(matchingDisc1){
@@ -40,6 +41,7 @@ let createDisc1 =
         let myDiscId1 = getRandomNum1();
         let completed1 = false;
         let color1 = request.body.color;
+        let weight1 = request.body.weight;
 
         // read the description from the request body,
         //and create a new disc item, with the description
@@ -50,6 +52,7 @@ let createDisc1 =
         newDisc1.id = myDiscId1;
         newDisc1.completed = completed1;
         newDisc1.color = color1
+        newDisc1.weight = weight1;
 
         // add the new disc item to the bag array
 
@@ -76,7 +79,7 @@ let deleteDisc1 =
         //Innova Bag array
 
         let matchingIndex1 = innovaBag1.find(function(disc1, index){
-            return disc1.id == myDiscId;
+            return disc1.id === myDiscId;
         })
 
         // if the index is less than 0, that means there was not a match to the id in the innova bag array
@@ -104,6 +107,11 @@ let updateDisc1 =
         // get the new completed flag from the body
         let completed1 = request.body.completed;
 
+        // get the new color from the body
+        let color1 = request.body.color;
+
+        let weight1 = request.body.weight;
+
         //we need to get the disc item we want to update from the innova bag array
 
         let matchingDisc1 = innovaBag1.find(function(disc1, index){
@@ -117,6 +125,9 @@ let updateDisc1 =
         if(matchingDisc1){
             matchingDisc1.description = description1;
             matchingDisc1.completed = completed1;
+            matchingDisc1.color = color1;
+            matchingDisc1.weight = weight1;
+
             response.json(matchingDisc1);
         } else {
             response.json(undefined);

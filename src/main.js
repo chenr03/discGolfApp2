@@ -5,7 +5,7 @@ let PORT = 4040;
 let discGolfApp = express();
 
 discGolfApp.use(express.json());
-discGolfApp.use(express.static("./src"));
+discGolfApp.use(express.static("./discGolfApp2/src"));
 
 
 // I will capture all the Disc Golf Routes we have
