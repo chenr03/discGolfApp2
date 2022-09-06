@@ -40,6 +40,7 @@ let createDisc3 =
         let myDiscId3 = getRandomNum3();
         let completed3 = false;
         let color3 = request.body.color;
+        let weight3 = request.body.weight;
 
         // read the description from the request body,
         //and create a new disc item, with the description
@@ -51,6 +52,7 @@ let createDisc3 =
         newDisc3.id = myDiscId3;
         newDisc3.completed = completed3;
         newDisc3.color = color3;
+        newDisc3.weight = weight3;
 
         // add the new disc item to the bag array
 
@@ -108,6 +110,9 @@ let updateDisc3 =
         // get the new color from the body
         let color3 = request.body.color;
 
+        // get the new weight from the body
+        let weight3 = request.body.color;
+
         //we need to get the disc item we want to update from the innova bag array
         let matchingDisc3 = innovaBag3.find(function(disc3, index){
             return disc3.id == myDiscId3
@@ -121,6 +126,8 @@ let updateDisc3 =
             matchingDisc3.description = description3;
             matchingDisc3.completed = completed3;
             matchingDisc3.color = color3;
+            matchingDisc3.weight = weight3;
+
             response.json(matchingDisc3);
         } else {
             response.json(undefined);
