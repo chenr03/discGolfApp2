@@ -1,4 +1,7 @@
+let database1 = require("../Utilities/database");
+
 let innovaBag1 = [];
+
 
 //1
 let getDiscBag1 =
@@ -7,6 +10,8 @@ let getDiscBag1 =
         console.log ("GET /discs1");
         response.json(innovaBag1)
         // lets user see what's inside the innovaBag1 array
+
+        // what kind of query do we send to get all the items in the database
 
     };
 
@@ -29,6 +34,8 @@ let getSingleDisc1 =
             response.json(undefined);
         }
     };
+
+// what kind of query do we send to get a single item from the db if we know the id
 
 //3
 let createDisc1 =
@@ -63,6 +70,8 @@ let createDisc1 =
         response.json(newDisc1);
     };
 
+// what kind of query do we send to create an entry in the database
+
 //4
 let deleteDisc1 =
 
@@ -90,6 +99,8 @@ let deleteDisc1 =
             response.json(deletedDisc1)
         }
     };
+
+// what kind of query do we send to delete an entry in the database if we know the id
 
 //5
 let updateDisc1 =
@@ -134,6 +145,8 @@ let updateDisc1 =
         }
 
     };
+
+// what kind of query do we send to update an entry in the database if we know the id
 
 
 // this function will return a random number
