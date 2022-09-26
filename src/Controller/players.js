@@ -1,6 +1,14 @@
 let database = require("../Utilities/database");
+//console.log('database', database)
 
-let playerTable = [];
+//- bring over database.
+let playerTable = []; //
+
+// - taken out for the moment, as we are using the data ase and not an array
+
+// this function takes in a request and a response object
+// and returns a summary of all the player items in the response
+// f the query fails for any reason, then return 500 status code.
 
 
 //1
@@ -13,13 +21,16 @@ let getAllPlayers =
 
         // what kind of query do we send to get all the items in the database
 
-        let sql = "SELECT Id descriptions FROM players";
+        let sql = "select Id, firstName, lastname, gender from players";
 
         database.query(sql, function(err, rows){
+            //console.log('im here' )
             if(err){
+                console.log("list of players query failed", err)
+                response.sendStatus(500); // 500 response back because it was our fault
 
             } else {
-                response.json(playerTable)
+                response.json(rows);
             }
         });
 
@@ -27,23 +38,52 @@ let getAllPlayers =
     };
 
 //2
+/**
+ * This function takes in a request and response object
+ * and returns a single player based on the id that is a path parameter in the request
+ *
+ * if the id is not a valid id, the response will be 'null'
+ * otherwise, the entire player object will be returned from the response
+ *
+ * /players/:id
+ */
+
 let getSinglePlayer =
+    // what kind of query do we need to send
+    // to get a single player from the database if we know the id
 
     function(request, response){
         console.log ("GET /players/:id");
 
 
-        let myPlayerId = request.params.id
+        // this is bad, you should not do this...
+        let id = request.params.id; // because the id is a path param
 
-        let matchingPlayer = playerTable.find(function(player, index){
-            return player.id === myPlayerId;
-        })
-
-        if(matchingPlayer){
-            response.json(matchingPlayer)
-        } else {
-            response.json(undefined);
+        // if id is falsy (null, undefined, NAN, '')
+        if(!id) {
+            response.send(400); // this is the clients fault resulting in 400 error code
+            return;
         }
+
+
+        // this is bad, you should not do this...
+        let sql = "select id, firstName, lastName, gender from players where id = "+id;
+
+        database.query(sql, function(err, rows){
+            if(err){
+                console.log("failed to get a player from the database", err);
+                response.sendStatus(500); // this is our fault if we get an error, so 500 error code
+            } else {
+                if(rows.length > 1){
+                    console.log("returned more than 1 row for id", id);
+                    response.sendStatus(500); // again this is still our fault, (500) code
+                } else if (rows.length === 0){
+                    response.json(null);
+                } else {
+                    response.json(rows[0]);
+                }
+            }
+        })
     };
 
 // what kind of query do we send to get a single item from the db if we know the id
@@ -57,7 +97,7 @@ let createPlayer =
 
 
         let description = request.body.description;
-        let playersId = getRandomNum();
+        let id = getRandomNum();
         let firstName = request.body.firstName;
         let lastName = request.body.lastName;
         let completed = false;
@@ -68,7 +108,7 @@ let createPlayer =
 
         let players= {};
         players.description = description;
-        players.id = playersId;
+        players.id = id;
         players.firstName= firstName ;
         players.lastName = lastName
         players.completed = completed;
@@ -94,7 +134,7 @@ let deletePlayer =
 
 
         // find the id of the player we want to delete
-        let myPlayerId = request.params.id;
+        let id = request.params.id;
 
         // we need to remove this player from our "Player Table" -  array
         // there are a lot of ways to do this
@@ -102,7 +142,7 @@ let deletePlayer =
         //Player Table array
 
         let matchingIndex = playerTable.find(function(player, index){
-            return player.id === myPlayerId;
+            return player.id === id;
         })
 
         // if the index is less than 0, that means there was not a match to the id in the innova bag array
@@ -127,7 +167,7 @@ let updatePlayer =
         let description = request.body.description;
 
         // get the id to update from the route
-        let myPlayerId = request.params.id;
+        let id = request.params.id;
 
         // get the new completed flag from the body
         let completed = request.body.completed;
@@ -140,7 +180,7 @@ let updatePlayer =
         //we need to get the disc item we want to update from the innova bag array
 
         let matchingPlayer = playerTable.find(function(players, index){
-            return players.id == myPlayerId
+            return players.id == id
         });
 
         // if we found a matching disc in the bag, update it
@@ -149,7 +189,7 @@ let updatePlayer =
 
         if(matchingPlayer){
             matchingPlayer.description = description;
-            matchingPlayer.Id = myPlayerId
+            matchingPlayer.id = id
             matchingPlayer.completed = completed;
             matchingPlayer.firstName = firstName;
             matchingPlayer.lastName = lastName;

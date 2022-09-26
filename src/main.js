@@ -1,6 +1,6 @@
 let express = require('express');
 
-let PORT = 4040;
+let PORT = 8080;
 
 let discGolfApp = express();
 
