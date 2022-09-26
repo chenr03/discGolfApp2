@@ -67,9 +67,13 @@ let getSinglePlayer =
 
 
         // this is bad, you should not do this...
-        let sql = "select id, firstName, lastName, gender from players where id = "+id;
+        // let sql = "select id, firstName, lastName, gender from players where id = "+id;
+        // instead use parameterized sql statements
 
-        database.query(sql, function(err, rows){
+        let sql = "select id, firstName, lastName, gender from players where id = ?";
+        let params = [id]
+
+        database.query(sql, params, function(err, rows){
             if(err){
                 console.log("failed to get a player from the database", err);
                 response.sendStatus(500); // this is our fault if we get an error, so 500 error code
