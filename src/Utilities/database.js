@@ -15,7 +15,7 @@ connection.query("select now()" , function(err, rows){
     if(err){
         console.log("Connection Incorrect: You're a Moron", err);
     } else {
-        console.log("Test query result, ", rows);
+        console.log("Date and Time?, ", rows);
     }
 });
 
