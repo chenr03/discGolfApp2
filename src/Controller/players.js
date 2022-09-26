@@ -2,7 +2,7 @@ let database = require("../Utilities/database");
 //console.log('database', database)
 
 //- bring over database.
-let playerTable = []; //
+// let playerTable = []; //
 
 // - taken out for the moment, as we are using the data ase and not an array
 
@@ -21,7 +21,7 @@ let getAllPlayers =
 
         // what kind of query do we send to get all the items in the database
 
-        let sql = "select Id, firstName, lastname, gender from players";
+        let sql = "select Id, firstName, lastName, gender from players";
 
         database.query(sql, function(err, rows){
             //console.log('im here' )
@@ -84,6 +84,17 @@ let getSinglePlayer =
                 } else if (rows.length === 0){
                     response.json(null);
                 } else {
+
+                    // // grab the first row
+                    // // and alter it before sending it on to the client
+                    // // we are replacing the gender (0, 1) with (no, yes)
+                    // let row = rows[0];
+                    // if(row.gender === 1){
+                    //     rows.gender = 'yes';
+                    // } else {
+                    //     rows.gender = 'no';
+                    // }
+
                     response.json(rows[0]);
                 }
             }
@@ -94,43 +105,58 @@ let getSinglePlayer =
 
 
 //3
+
+// this function accepts requests and responses
+// the requests should include a json object that includes
+// -- description
+// -- notes
+// we will create an entry in the player table inside the database, with the corresponding
+//  firstName, lastName, and gender; the id will be auto generated.
+
+// the response will do something ( either return an object or an id) ....
+
 let createPlayer =
+    // what kind of query do we send
+    // to create an entry in the database
 
     function(request, response){
         console.log ("POST /players");
 
 
-        let description = request.body.description;
-        let id = getRandomNum();
-        let firstName = request.body.firstName;
-        let lastName = request.body.lastName;
-        let completed = false;
+        // the colum in the table are the contract between express and the database
+        let sql = "insert into players (firstName, lastName, gender) values (?, ?, ?)";
+        let params = [
+            request.body.firstName, // this is the contract with the client side
+            request.body.lastName, // another contract with the client side
+            request.body.gender // a third param with the client side
 
-        // read the description from the request body,
-        //and create a new player, with the description
-        // and use a random number from the id - using the math.random, and math.floor function
+        ];
 
-        let players= {};
-        players.description = description;
-        players.id = id;
-        players.firstName= firstName ;
-        players.lastName = lastName
-        players.completed = completed;
+        database.query(sql, params, function(err, rows){
+            if(err){
+                console.log("Failed to create an item", err);
+                response.sendStatus(500); // this is because there was an error on our side
+            } else {
+                console.log("Player created", rows);
+                response.json(rows);
+            }
+        });
 
-        // add the new player to the player table
-        // using the correct Values listed above when using the INSERT query
-        // INSERT players into player table.
 
-        playerTable.push(players);
-
-        // return the new player on the response
-
-        response.json(players);
     };
 
 // what kind of query do we send to create an entry in the database
 
 //4
+
+// This function takes in a request and response object
+// and deletes a single player based on the id that is a path parameter in the request
+//if the id is not a valid id, the response will be 'null'
+//otherwise, the entire object will be deleted
+
+///players/:id
+
+
 let deletePlayer =
 
     function(request, response){
@@ -212,11 +238,11 @@ let updatePlayer =
 // between 0 and 1000
 // this function comes into play with all functions, but is especially key in the delete function.
 
-let getRandomNum = function(){
-    let randomFloat = Math.random();
-    let bigRandomFloat = randomFloat * 1000;
-    let randomNum = Math.floor(bigRandomFloat);
-    return randomNum.toString();
-}
+// let getRandomNum = function(){
+//     let randomFloat = Math.random();
+//     let bigRandomFloat = randomFloat * 1000;
+//     let randomNum = Math.floor(bigRandomFloat);
+//     return randomNum.toString();
+// }
 
 module.exports = {getAllPlayers, getSinglePlayer, createPlayer, deletePlayer, updatePlayer};
