@@ -189,6 +189,7 @@ let deletePlayer =
 //5
 let updatePlayer =
 
+
     function(request, response){
         console.log ("PUT /players");
 
