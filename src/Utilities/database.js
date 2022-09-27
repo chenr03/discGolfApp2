@@ -12,6 +12,7 @@ connection.connect();
 
 // this is async
 connection.query("select now()" , function(err, rows){
+
     if(err){
         console.log("Connection Incorrect: You're a Moron", err);
     } else {
