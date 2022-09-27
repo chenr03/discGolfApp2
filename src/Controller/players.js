@@ -124,8 +124,9 @@ let createPlayer =
 
 
         // the colum in the table are the contract between express and the database
-        let sql = "insert into players (firstName, lastName, gender) values (?, ?, ?)";
+        let sql = "INSERT INTO players (id, firstName, lastName, gender) VALUES (?, ?, ?, ?)";
         let params = [
+            request.body.id,
             request.body.firstName, // this is the contract with the client side
             request.body.lastName, // another contract with the client side
             request.body.gender // a third param with the client side
@@ -160,28 +161,42 @@ let createPlayer =
 let deletePlayer =
 
     function(request, response){
-        console.log ("DELETE /players");
+        console.log ("DELETE /players/:id");
 
+        let id = request.params.id; // because the id is a path param
+        let sql = "DELETE FROM players WHERE id = ?"
+        let params = [id];
 
+        console.log("request.body", request.body);
+
+        database.query(sql, params, function(err, rows){
+            if(err){
+                console.log("Failed to Delete an item", err);
+                response.sendStatus(500); // this is because there was an error on Server side
+            } else {
+                console.log("Player deleted", rows);
+                response.json(rows);
+            }
+        });
         // find the id of the player we want to delete
-        let id = request.params.id;
 
-        // we need to remove this player from our "Player Table" -  array
-        // there are a lot of ways to do this
-        // Again I am choosing to use .find, to find the player by ID, and then .splice to remove it from the
-        //Player Table array
-
-        let matchingIndex = playerTable.find(function(player, index){
-            return player.id === id;
-        })
-
-        // if the index is less than 0, that means there was not a match to the id in the innova bag array
-        if(matchingIndex < 0){
-            response.json(undefined);
-        } else {
-            let deletedPlayer = playerTable.splice(matchingIndex, 1)
-            response.json(deletedPlayer)
-        }
+    //
+    //     // we need to remove this player from our "Player Table" -  array
+    //     // there are a lot of ways to do this
+    //     // Again I am choosing to use .find, to find the player by ID, and then .splice to remove it from the
+    //     //Player Table array
+    //
+    //     let matchingIndex = playerTable.find(function(player, index){
+    //         return player.id === id;
+    //     })
+    //
+    //     // if the index is less than 0, that means there was not a match to the id in the innova bag array
+    //     if(matchingIndex < 0){
+    //         response.json(undefined);
+    //     } else {
+    //         let deletedPlayer = playerTable.splice(matchingIndex, 1)
+    //         response.json(deletedPlayer)
+    //     }
     };
 
 // what kind of query do we send to delete an entry in the database if we know the id
