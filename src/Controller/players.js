@@ -21,7 +21,7 @@ let getAllPlayers =
 
         // what kind of query do we send to get all the items in the database
 
-        let sql = "select Id, firstName, lastName, gender from players";
+        let sql = "select Id, firstName, lastName, gender from players"; // GETS all players by selecting Id, firstName, lastName, gender
 
         connection.query(sql, function(err, rows){
             //console.log('im here' )
@@ -30,7 +30,7 @@ let getAllPlayers =
                 response.sendStatus(500); // 500 response back because it was our fault
 
             } else {
-                response.json(rows);
+                response.json(rows); // this GETS all players in table
             }
         });
 
@@ -124,9 +124,8 @@ let createPlayer =
 
 
         // the colum in the table are the contract between express and the database
-        let sql = "INSERT INTO players (id, firstName, lastName, gender) VALUES (?, ?, ?, ?)";
+        let sql = "INSERT INTO players (firstName, lastName, gender) VALUES (?, ?, ?)";// inserts player object table
         let params = [
-            request.body.id,
             request.body.firstName, // this is the contract with the client side
             request.body.lastName, // another contract with the client side
             request.body.gender // a third param with the client side
@@ -138,7 +137,7 @@ let createPlayer =
                 console.log("Failed to create an item", err);
                 response.sendStatus(500); // this is because there was an error on our side
             } else {
-                console.log("Player created", rows);
+                console.log("Player created", rows); // creates the player
                 response.json(rows);
             }
         });
@@ -180,25 +179,7 @@ let deletePlayer =
                 response.json(rows);
             }
         });
-        // find the id of the player we want to delete
 
-    //
-    //     // we need to remove this player from our "Player Table" -  array
-    //     // there are a lot of ways to do this
-    //     // Again I am choosing to use .find, to find the player by ID, and then .splice to remove it from the
-    //     //Player Table array
-    //
-    //     let matchingIndex = playerTable.find(function(player, index){
-    //         return player.id === id;
-    //     })
-    //
-    //     // if the index is less than 0, that means there was not a match to the id in the innova bag array
-    //     if(matchingIndex < 0){
-    //         response.json(undefined);
-    //     } else {
-    //         let deletedPlayer = playerTable.splice(matchingIndex, 1)
-    //         response.json(deletedPlayer)
-    //     }
     };
 
 // what kind of query do we send to delete an entry in the database if we know the id
@@ -208,97 +189,39 @@ let deletePlayer =
 let updatePlayer =
 
     function(req, res){
-        console.log("PUT /players/:id, PUT /players/:firstName, PUT /players/:lastName, PUT /players/:gender")
-
-        //the column in the table is the contract between express and the database
-        let sql =  `UPDATE players SET
-                    Id = ${req.params.Id}, firstName = ${req.params.firstName}, lastName = ${req.params.lastName}, gender = ${req.params.gender} 
-                    WHERE Id = ${req.params.Id}`;
+        console.log("PUT /players/:id") // currently does not work - "ironically update needs an update"
 
 
-        connection.query(sql, function(err, rows){
+        //this column in the table is the contract between express and the database
+       let id = req.params.id; // coming from the path parameter
+       if (!id) {
+           res.sendStatus(400)
+           return;
+       }
+
+                let sql = `UPDATE players SET firstName = ?, lastName = ?, gender = ? WHERE id = ?`;
+                let params = [req.body.firstName, req.body.lastName, req.body.gender, id]
+
+
+
+
+        // let sql =  `UPDATE players SET // cannot do this in this way "sql injection"
+        //             Id = ${req.params.Id}, firstName = ${req.params.firstName}, lastName = ${req.params.lastName}, gender = ${req.params.gender}
+        //             WHERE Id = ${req.params.Id}`;
+
+
+        connection.query(sql, params, function(err, rows){
             if(err){
                 console.log("Failed to Update an item", err);
                 res.sendStatus(500); // this is because there was an error on our side
             } else {
                 console.log("Player Updated", rows);
-                res.json(rows);
+                res.sendStatus(202); // no data sent.
             }
         });
 
     };
 
-// const updateUser = (req, res) => {
-//     console.log(`inside the updateUser route`);
-//     // Update user with id
-//     let sql = `UPDATE users SET
-//         UserId = ${req.params.UserId}, FirstName = ${req.params.FirstName}, LastName = ${req.params.LastName}, Age = ${req.params.Age}
-//         WHERE UserId = ${req.params.UserId}`;
-//     connection.query(sql, (err, results) => {
-//         if (err) {
-//             console.log(`there is an error : ${err}`);
-//             res.status(500).send(`internal service error (employee by firstname), ${req.params.FirstName}`)
-//         };
-//         console.log(results);
-//         res.json(results)
-//     })
-// };
 
-// what kind of query do we send to update an entry in the database if we know the id
-
-        // get the new description from the body
-        // let description = request.body.description;
-        //
-        // // get the id to update from the route
-        // let id = request.params.id;
-        //
-        // // get the new completed flag from the body
-        // let completed = request.body.completed;
-        //
-        // // get the new color from the body
-        // let firstName = request.body.firstName;
-        //
-        // let lastName = request.body.lastName;
-        //
-        // //we need to get the disc item we want to update from the innova bag array
-        //
-        // let matchingPlayer = playerTable.find(function(players, index){
-        //     return players.id == id
-        // });
-        //
-        // // if we found a matching disc in the bag, update it
-        // // and return the updated item in the response
-        // // if not return undefined exclusively as previously explained.
-        //
-        // if(matchingPlayer){
-        //     matchingPlayer.description = description;
-        //     matchingPlayer.id = id
-        //     matchingPlayer.completed = completed;
-        //     matchingPlayer.firstName = firstName;
-        //     matchingPlayer.lastName = lastName;
-        //
-        //     response.json(matchingPlayer);
-        // } else {
-        //     response.json(undefined);
-        // }
-
-
-// what kind of query do we send to update an entry in the database if we know the id
-
-//----------------------------------------------------------------------------------------------------------------
-
-// all of this was from a previous assignment where we created the random id using math. random()
-
-
-// this function will return a random number
-// between 0 and 1000
-// this function comes into play with all functions, but is especially key in the delete function.
-
-// let getRandomNum = function(){
-//     let randomFloat = Math.random();
-//     let bigRandomFloat = randomFloat * 1000;
-//     let randomNum = Math.floor(bigRandomFloat);
-//     return randomNum.toString();
-// }
 
 module.exports = {getAllPlayers, getSinglePlayer, createPlayer, deletePlayer, updatePlayer};
