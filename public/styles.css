@@ -17,6 +17,7 @@ h1 {
     font-size: 50px;
     text-decoration: underline;
     text-shadow: -1px 1px 0 #ffff, 1px 1px 0 #ffff, 1px -1px 0 #ffff, -1px -1px 0 #ffff;
+    margin-bottom: 50px;
 
 }
 
@@ -28,9 +29,11 @@ h2{
 h3 {
 
     color: dimgrey;
+    margin-top: 50px;
+    margin-left: 18%;
 }
 
 span{
-
+    margin-left: 18%;
 
 }
