@@ -12,16 +12,16 @@
 
 
 
-h1 {
-    padding-left: 23%;
-    font-size: 50px;
+span {
+    padding-left: 15%;
+    font-size: 60px;
     text-decoration: underline;
     text-shadow: -1px 1px 0 #ffff, 1px 1px 0 #ffff, 1px -1px 0 #ffff, -1px -1px 0 #ffff;
     margin-bottom: 50px;
 
 }
 
-h2{
+p{
     padding-left: 25%;
     color: darkblue;
 }
@@ -31,9 +31,26 @@ h3 {
     color: dimgrey;
     margin-top: 50px;
     margin-left: 18%;
+
 }
 
-span{
+p{
     margin-left: 18%;
 
+}
+
+picture{
+    background-size: 50px;
+}
+
+header {
+    font-size: 35px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+h1{
+    font-size: 20px;
 }
