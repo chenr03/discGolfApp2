@@ -160,21 +160,7 @@ notes
 
              Authentication:
 
-             a-z0-9
-             1-26, 27-37
 
-             //bob123
-
-             2
-             15
-             2
-             28
-             29
-             30
-             =
-             106/6 = 17.6666667
-
-             instead of //bob123 store 17.6666667
 
 
              // cornerstone of cryptography
@@ -205,8 +191,4 @@ notes
             // then we also have to check the contents of the token to see if they meet
             // the special permissions before we process the request
 
-            //auth0.com
-            // Get Started with JSON Web Tokens
-            // don't have to write the javaScript -
-                    another service that is free now and you pay for later
-            //
+

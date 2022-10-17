@@ -69,8 +69,4 @@
             // then we also have to check the contents of the token to see if they meet
             // the special permissions before we process the request
 
-            //auth0.com
-            // Get Started with JSON Web Tokens
-            // don't have to write the javaScript -
-                    another service that is free now and you pay for later
-            //
+
