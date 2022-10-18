@@ -17,7 +17,7 @@ let getAllPlayers =
     function(request, response){
         console.log ("GET /players");
 
-        // lets user see what's inside the innovaBag1 array
+        // lets user see what's inside the players table
 
         // what kind of query do we send to get all the items in the database
 
@@ -129,7 +129,7 @@ let createPlayer =
 
 
         // the colum in the table are the contract between express and the database
-        let sql = "INSERT INTO Players gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// inserts player object table
+        let sql = "INSERT INTO Players gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// inserts player object table
         let params = [
             request.body.gameId, // this is the contract with the client side
             request.body.playerId, // another contract with the client side
@@ -188,7 +188,7 @@ let deletePlayer =
     function(request, response){
         console.log ("DELETE /players/:playerId");
 
-        let playerId = request.params.playerId; // because the id is a path param
+        let playerId = request.params.playerId; // because the playerId is a path param
         let sql = "DELETE FROM players WHERE playerId = ?"
         let params = [playerId];
 
@@ -213,7 +213,7 @@ let deletePlayer =
 let updatePlayer =
 
     function(request, response){
-        console.log("PUT /players/:playerId") // currently does not work - "ironically update needs an update"
+        console.log("PUT /players/:playerId")
 
 
         //this column in the table is the contract between express and the database
