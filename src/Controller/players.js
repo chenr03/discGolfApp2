@@ -78,7 +78,7 @@ let getSinglePlayer =
 
         let params = [playerId]
 
-         connection.query(sql, params, function(err, rows){
+        connection.query(sql, params, function(err, rows){
             if(err){
                 console.log("failed to get a player from the database", err);
                 response.sendStatus(500); // this is our fault if we get an error, so 500 error code
@@ -217,37 +217,37 @@ let updatePlayer =
 
 
         //this column in the table is the contract between express and the database
-       let playerId = request.params.playerId; // coming from the path parameter
-       if (!playerId) {
-           response.sendStatus(400)
-           return;
-       }
+        let playerId = request.params.playerId; // coming from the path parameter
+        if (!playerId) {
+            response.sendStatus(400)
+            return;
+        }
 
-                let sql = `UPDATE Players SET gameId = ?, playerId = ?, playerName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE playerId = ?`;
-                let params = [
-                        request.body.gameId, // this is the contract with the client side
-                        request.body.playerId, // another contract with the client side
-                        request.body.playerName,
-                        request.body.Hole1,
-                        request.body.Hole2,
-                        request.body.Hole3,
-                        request.body.Hole4,
-                        request.body.Hole5,
-                        request.body.Hole6,
-                        request.body.Hole7,
-                        request.body.Hole8,
-                        request.body.Hole9,
-                        request.body.Hole10,
-                        request.body.Hole11,
-                        request.body.Hole12,
-                        request.body.Hole13,
-                        request.body.Hole14,
-                        request.body.Hole15,
-                        request.body.Hole16,
-                        request.body.Hole17,
-                        request.body.Hole18
+        let sql = `UPDATE Players SET gameId = ?, playerId = ?, playerName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE playerId = ?`;
+        let params = [
+            request.body.gameId, // this is the contract with the client side
+            request.body.playerId, // another contract with the client side
+            request.body.playerName,
+            request.body.Hole1,
+            request.body.Hole2,
+            request.body.Hole3,
+            request.body.Hole4,
+            request.body.Hole5,
+            request.body.Hole6,
+            request.body.Hole7,
+            request.body.Hole8,
+            request.body.Hole9,
+            request.body.Hole10,
+            request.body.Hole11,
+            request.body.Hole12,
+            request.body.Hole13,
+            request.body.Hole14,
+            request.body.Hole15,
+            request.body.Hole16,
+            request.body.Hole17,
+            request.body.Hole18
 
-                    ];
+        ];
 
 
 
@@ -272,3 +272,4 @@ let updatePlayer =
 
 
 module.exports = {getAllPlayers, getSinglePlayer, createPlayer, deletePlayer, updatePlayer};
+
