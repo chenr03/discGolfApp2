@@ -21,7 +21,11 @@ let getAllPlayers =
 
         // what kind of query do we send to get all the items in the database
 
-        let sql = "select Id, firstName, lastName, gender from players"; // GETS all players by selecting Id, firstName, lastName, gender
+        let sql = "select gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 from Players";
+
+
+        // GETS all players by selecting playerId,
+        /// firstName, lastName, gender
 
         connection.query(sql, function(err, rows){
             //console.log('im here' )
@@ -53,14 +57,14 @@ let getSinglePlayer =
     // to get a single player from the database if we know the id
 
     function(request, response){
-        console.log ("GET /players/:id");
+        console.log ("GET /players/:playerId");
 
 
         // this is bad, you should not do this...
-        let id = request.params.id; // because the id is a path param
+        let playerId = request.params.playerId; // because the id is a path param
 
         // if id is falsy (null, undefined, NAN, '')
-        if(!id) {
+        if(!playerId) {
             response.send(400); // this is the clients fault resulting in 400 error code
             return;
         }
@@ -70,8 +74,9 @@ let getSinglePlayer =
         // let sql = "select id, firstName, lastName, gender from players where id = "+id;
         // instead use parameterized sql statements
 
-        let sql = "select id, firstName, lastName, gender from players where id = ?";
-        let params = [id]
+        let sql = "select gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 from Players where playerId = ?";
+
+        let params = [playerId]
 
          connection.query(sql, params, function(err, rows){
             if(err){
@@ -79,7 +84,7 @@ let getSinglePlayer =
                 response.sendStatus(500); // this is our fault if we get an error, so 500 error code
             } else {
                 if(rows.length > 1){
-                    console.log("returned more than 1 row for id", id);
+                    console.log("returned more than 1 row for playerId", playerId);
                     response.sendStatus(500); // again this is still our fault, (500) code
                 } else if (rows.length === 0){
                     response.json(null);
@@ -124,17 +129,36 @@ let createPlayer =
 
 
         // the colum in the table are the contract between express and the database
-        let sql = "INSERT INTO players (firstName, lastName, gender) VALUES (?, ?, ?)";// inserts player object table
+        let sql = "INSERT INTO Players gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// inserts player object table
         let params = [
-            request.body.firstName, // this is the contract with the client side
-            request.body.lastName, // another contract with the client side
-            request.body.gender // a third param with the client side
+            request.body.gameId, // this is the contract with the client side
+            request.body.playerId, // another contract with the client side
+            request.body.playerName,
+            request.body.Hole1,
+            request.body.Hole2,
+            request.body.Hole3,
+            request.body.Hole4,
+            request.body.Hole5,
+            request.body.Hole6,
+            request.body.Hole7,
+            request.body.Hole8,
+            request.body.Hole9,
+            request.body.Hole10,
+            request.body.Hole11,
+            request.body.Hole12,
+            request.body.Hole13,
+            request.body.Hole14,
+            request.body.Hole15,
+            request.body.Hole16,
+            request.body.Hole17,
+            request.body.Hole18
+            // a third param with the client side
 
         ];
 
-        connection.query(sql, params, function(err, rows){
-            if(err){
-                console.log("Failed to create an item", err);
+        connection.query(sql, params, function(error, rows){
+            if(error){
+                console.log("Failed to create an item", error);
                 response.sendStatus(500); // this is because there was an error on our side
             } else {
                 console.log("Player created", rows); // creates the player
@@ -162,17 +186,17 @@ let createPlayer =
 let deletePlayer =
 
     function(request, response){
-        console.log ("DELETE /players/:id");
+        console.log ("DELETE /players/:playerId");
 
-        let id = request.params.id; // because the id is a path param
-        let sql = "DELETE FROM players WHERE id = ?"
-        let params = [id];
+        let playerId = request.params.playerId; // because the id is a path param
+        let sql = "DELETE FROM players WHERE playerId = ?"
+        let params = [playerId];
 
         console.log("request.body", request.body);
 
-        connection.query(sql, params, function(err, rows){
-            if(err){
-                console.log("Failed to Delete an item", err);
+        connection.query(sql, params, function(error, rows){
+            if(error){
+                console.log("Failed to Delete an item", error);
                 response.sendStatus(500); // this is because there was an error on Server side
             } else {
                 console.log("Player deleted", rows);
@@ -188,19 +212,42 @@ let deletePlayer =
 //5
 let updatePlayer =
 
-    function(req, res){
-        console.log("PUT /players/:id") // currently does not work - "ironically update needs an update"
+    function(request, response){
+        console.log("PUT /players/:playerId") // currently does not work - "ironically update needs an update"
 
 
         //this column in the table is the contract between express and the database
-       let id = req.params.id; // coming from the path parameter
-       if (!id) {
-           res.sendStatus(400)
+       let playerId = request.params.playerId; // coming from the path parameter
+       if (!playerId) {
+           response.sendStatus(400)
            return;
        }
 
-                let sql = `UPDATE players SET firstName = ?, lastName = ?, gender = ? WHERE id = ?`;
-                let params = [req.body.firstName, req.body.lastName, req.body.gender, id]
+                let sql = `UPDATE Players SET gameId = ?, playerId = ?, playerName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE playerId = ?`;
+                let params = [
+                        request.body.gameId, // this is the contract with the client side
+                        request.body.playerId, // another contract with the client side
+                        request.body.playerName,
+                        request.body.Hole1,
+                        request.body.Hole2,
+                        request.body.Hole3,
+                        request.body.Hole4,
+                        request.body.Hole5,
+                        request.body.Hole6,
+                        request.body.Hole7,
+                        request.body.Hole8,
+                        request.body.Hole9,
+                        request.body.Hole10,
+                        request.body.Hole11,
+                        request.body.Hole12,
+                        request.body.Hole13,
+                        request.body.Hole14,
+                        request.body.Hole15,
+                        request.body.Hole16,
+                        request.body.Hole17,
+                        request.body.Hole18
+
+                    ];
 
 
 
@@ -210,13 +257,13 @@ let updatePlayer =
         //             WHERE Id = ${req.params.Id}`;
 
 
-        connection.query(sql, params, function(err, rows){
-            if(err){
-                console.log("Failed to Update an item", err);
-                res.sendStatus(500); // this is because there was an error on our side
+        connection.query(sql, params, function(error, rows){
+            if(error){
+                console.log("Failed to Update an item", error);
+                response.sendStatus(500); // this is because there was an error on our side
             } else {
                 console.log("Player Updated", rows);
-                res.sendStatus(202); // no data sent.
+                response.sendStatus(202); // no data sent.
             }
         });
 
