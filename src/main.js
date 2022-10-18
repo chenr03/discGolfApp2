@@ -14,15 +14,25 @@ discGolfApp.use(express.static("./discGolfApp2/public"));
 let authRoutes = require("./Routes/authorizationRoutes")
 discGolfApp.use(authRoutes);
 
-// app.use(loginRoutes)
+let loginRoutes = require("./Routes/loginRoutes")
+discGolfApp.use(loginRoutes);
 
 
 // I will capture all the Disc Golf Routes we have
 // in one place, instead of defining the Routes directly
 // on the app object
 
-let playerRoutes = require("./Routes/playerRoutes.js");
+let playerRoutes = require("./Routes/playerRoutes");
 discGolfApp.use(playerRoutes);
+
+let userRoutes = require("./Routes/userRoutes");
+discGolfApp.use(userRoutes);
+
+let gameRoutes = require("./Routes/gameRoutes");
+discGolfApp.use(gameRoutes);
+
+let courseRoutes = require("./Routes/courseRoutes");
+discGolfApp.use(courseRoutes);
 
 // only for users table and login
 
