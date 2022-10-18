@@ -6,10 +6,13 @@ let PORT = process.env.PORT || 8080;
 
 let discGolfApp = express();
 
+
+
 discGolfApp.use(express.json());
 discGolfApp.use(express.static("./discGolfApp2/public"));
 
-let authRoutes = require("./routes/authorizationRoutes")
+let authRoutes = require("./Routes/authorizationRoutes")
+discGolfApp.use(authRoutes);
 
 // app.use(loginRoutes)
 
