@@ -19,7 +19,7 @@ let getAllPlayers =
 
         // lets user see what's inside the players table
 
-        // what kind of query do we send to get all the items in the database
+        // what kind of query do we send to get all the players in the database
 
         let sql = "select gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 from Players";
 
@@ -27,10 +27,10 @@ let getAllPlayers =
         // GETS all players by selecting playerId,
         /// firstName, lastName, gender
 
-        connection.query(sql, function(err, rows){
+        connection.query(sql, function(error, rows){
             //console.log('im here' )
-            if(err){
-                console.log("list of players query failed", err)
+            if(error){
+                console.log("list of players query failed", error)
                 response.sendStatus(500); // 500 response back because it was our fault
 
             } else {
@@ -54,7 +54,7 @@ let getAllPlayers =
 
 let getSinglePlayer =
     // what kind of query do we need to send
-    // to get a single player from the database if we know the id
+    // to get a single player from the database if we know the playerId
 
     function(request, response){
         console.log ("GET /players/:playerId");
@@ -78,9 +78,9 @@ let getSinglePlayer =
 
         let params = [playerId]
 
-        connection.query(sql, params, function(err, rows){
-            if(err){
-                console.log("failed to get a player from the database", err);
+        connection.query(sql, params, function(error, rows){
+            if(error){
+                console.log("failed to get a player from the database", error);
                 response.sendStatus(500); // this is our fault if we get an error, so 500 error code
             } else {
                 if(rows.length > 1){
@@ -158,7 +158,7 @@ let createPlayer =
 
         connection.query(sql, params, function(error, rows){
             if(error){
-                console.log("Failed to create an item", error);
+                console.log("Failed to create a Player", error);
                 response.sendStatus(500); // this is because there was an error on our side
             } else {
                 console.log("Player created", rows); // creates the player
@@ -189,14 +189,14 @@ let deletePlayer =
         console.log ("DELETE /players/:playerId");
 
         let playerId = request.params.playerId; // because the playerId is a path param
-        let sql = "DELETE FROM players WHERE playerId = ?"
+        let sql = "DELETE FROM Players WHERE playerId = ?"
         let params = [playerId];
 
         console.log("request.body", request.body);
 
         connection.query(sql, params, function(error, rows){
             if(error){
-                console.log("Failed to Delete an item", error);
+                console.log("Failed to Delete Player", error);
                 response.sendStatus(500); // this is because there was an error on Server side
             } else {
                 console.log("Player deleted", rows);
@@ -219,7 +219,7 @@ let updatePlayer =
         //this column in the table is the contract between express and the database
         let playerId = request.params.playerId; // coming from the path parameter
         if (!playerId) {
-            response.sendStatus(400)
+            response.sendStatus(400) // client error
             return;
         }
 
@@ -259,7 +259,7 @@ let updatePlayer =
 
         connection.query(sql, params, function(error, rows){
             if(error){
-                console.log("Failed to Update an item", error);
+                console.log("Failed to Update an Player", error);
                 response.sendStatus(500); // this is because there was an error on our side
             } else {
                 console.log("Player Updated", rows);
