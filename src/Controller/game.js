@@ -35,7 +35,7 @@ let getSingleGame =
     // to get a single Game from the database if we know the gameId
 
     function(request, response) {
-        console.log("GET /games/:gameId");
+        console.log("GET /game/:gameId");
 
         let gameId = request.params.gameId
 
@@ -73,7 +73,7 @@ let getSingleGame =
 let createGame =
 
     function(request, response){
-        console.log("POST /games");
+        console.log("POST /game");
 
         // the column in the table is the contract between express and the database
         let sql = "INSERT INTO Games userId, courseId, gameId, gameName VALUES (?, ?, ?, ?)";
@@ -103,7 +103,7 @@ let createGame =
 let deleteGame =
 
     function(request, response){
-        console.log("DELETE /games/:gameId");
+        console.log("DELETE /game/:gameId");
 
         let gameId = request.params.gameId; // because the gameId is a path param
         let sql = "DELETE FROM Games WHERE gameId = ?";
@@ -127,7 +127,7 @@ let deleteGame =
 let updateGame =
 
     function(request, response){
-        console.log("PUT /games/:gameId")
+        console.log("PUT /game/:gameId")
 
 
     // this column in the table is the contract between express and the database

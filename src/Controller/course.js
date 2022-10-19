@@ -11,7 +11,7 @@ let getAllCourses =
 
         // what kind of query do we send to get all the courses in the database
 
-        let sql = "SELECT courseId, courseName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9 Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score FROM Courses";
+        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Courses";
 
             // GETS all courses by selecting courseId,
             // courseName, Hole1Score, Hole 2 Score, etc.
@@ -33,7 +33,7 @@ let getAllCourses =
 let getSingleCourse =
 
     function(request, response){
-        console.log("GET /courses/:courseId");
+        console.log("GET /course/:courseId");
 
         let courseId = request.params.courseId;
 
@@ -43,7 +43,7 @@ let getSingleCourse =
             return;
         }
 
-        let sql = "SELECT courseId, courseName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9 Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score FROM Courses where courseId =?";
+        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Courses where courseId = ?";
 
         let params = [courseId]
 
@@ -70,32 +70,32 @@ let getSingleCourse =
 let createCourse =
 
     function(request, response){
-        console.log("POST /courses");
+        console.log("POST /course");
 
 
         //these columns in the table is the contract between express and the database
-        let sql = "INSERT INTO Courses courseId, courseName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9 Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
+        let sql = "INSERT INTO Courses courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
         let params = [
             request.body.courseId,
             request.body.courseName,
-            request.body.Hole1Score,
-            request.body.Hole2Score,
-            request.body.Hole3Score,
-            request.body.Hole4Score,
-            request.body.Hole5Score,
-            request.body.Hole6Score,
-            request.body.Hole7Score,
-            request.body.Hole8Score,
-            request.body.Hole9Score,
-            request.body.Hole10Score,
-            request.body.Hole11Score,
-            request.body.Hole12Score,
-            request.body.Hole13Score,
-            request.body.Hole14Score,
-            request.body.Hole15Score,
-            request.body.Hole16Score,
-            request.body.Hole17Score,
-            request.body.Hole18Score
+            request.body.Hole1,
+            request.body.Hole2,
+            request.body.Hole3,
+            request.body.Hole4,
+            request.body.Hole5,
+            request.body.Hole6,
+            request.body.Hole7,
+            request.body.Hole8,
+            request.body.Hole9,
+            request.body.Hole10,
+            request.body.Hole11,
+            request.body.Hole12,
+            request.body.Hole13,
+            request.body.Hole14,
+            request.body.Hole15,
+            request.body.Hole16,
+            request.body.Hole17,
+            request.body.Hole18
         ];
 
         connection.query(sql, params, function(error, rows){
@@ -114,7 +114,7 @@ let createCourse =
 let deleteCourse =
 
     function(request, response){
-        console.log("DELETE /courses/:courseId");
+        console.log("DELETE /course/:courseId");
 
         let courseId = request.params.courseId; // because the courseId is a path param
         let sql = "DELETE FROM Courses WHERE courseId = ?"
@@ -139,7 +139,7 @@ let deleteCourse =
 let updateCourse =
 
     function(request, response){
-        console.log("PUT /courses/:courseId");
+        console.log("PUT /course/:courseId");
 
         //these columns in the table is the contract between express and the database
         let courseId = request.params.courseId; // coming from the path parameter
@@ -148,28 +148,28 @@ let updateCourse =
             return;
         }
 
-        let sql = "UPDATE Courses SET courseId = ?, courseName = ?, Hole1Score = ?, Hole2Score = ?, Hole3Score = ?, Hole4Score = ?, Hole5Score = ?, Hole6Score = ?, Hole7Score = ?, Hole8Score = ?, Hole9Score = ?, Hole10Score = ?, Hole11Score = ?, Hole12Score = ?, Hole13Score = ?, Hole14Score = ?, Hole15Score = ?, Hole16Score = ?, Hole17Score = ?, Hole18Score = ? WHERE courseId = ?";
+        let sql = "UPDATE Courses SET courseId = ?, courseName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE courseId = ?";
         let params = [
             request.body.courseId,
             request.body.courseName,
-            request.body.Hole1Score,
-            request.body.Hole2Score,
-            request.body.Hole3Score,
-            request.body.Hole4Score,
-            request.body.Hole5Score,
-            request.body.Hole6Score,
-            request.body.Hole7Score,
-            request.body.Hole8Score,
-            request.body.Hole9Score,
-            request.body.Hole10Score,
-            request.body.Hole11Score,
-            request.body.Hole12Score,
-            request.body.Hole13Score,
-            request.body.Hole14Score,
-            request.body.Hole15Score,
-            request.body.Hole16Score,
-            request.body.Hole17Score,
-            request.body.Hole18Score
+            request.body.Hole1,
+            request.body.Hole2,
+            request.body.Hole3,
+            request.body.Hole4,
+            request.body.Hole5,
+            request.body.Hole6,
+            request.body.Hole7,
+            request.body.Hole8,
+            request.body.Hole9,
+            request.body.Hole10,
+            request.body.Hole11,
+            request.body.Hole12,
+            request.body.Hole13,
+            request.body.Hole14,
+            request.body.Hole15,
+            request.body.Hole16,
+            request.body.Hole17,
+            request.body.Hole18
         ];
 
         connection.query(sql, params, function(error, rows){

@@ -21,7 +21,7 @@ let getAllPlayers =
 
         // what kind of query do we send to get all the players in the database
 
-        let sql = "select gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 from Players";
+        let sql = "select gameId, playerId, playerName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score from Players";
 
 
         // GETS all players by selecting playerId,
@@ -57,7 +57,7 @@ let getSinglePlayer =
     // to get a single player from the database if we know the playerId
 
     function(request, response){
-        console.log ("GET /players/:playerId");
+        console.log ("GET /player/:playerId");
 
 
         // this is bad, you should not do this...
@@ -74,7 +74,7 @@ let getSinglePlayer =
         // let sql = "select id, firstName, lastName, gender from players where id = "+id;
         // instead use parameterized sql statements
 
-        let sql = "select gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 from Players where playerId = ?";
+        let sql = "select gameId, playerId, playerName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score from Players where playerId = ?";
 
         let params = [playerId]
 
@@ -125,33 +125,33 @@ let createPlayer =
     // to create an entry in the database
 
     function(request, response){
-        console.log ("POST /players");
+        console.log ("POST /player");
 
 
         // the colum in the table are the contract between express and the database
-        let sql = "INSERT INTO Players gameId, playerId, playerName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// inserts player object table
+        let sql = "INSERT INTO Players gameId, playerId, playerName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// inserts player object table
         let params = [
             request.body.gameId, // this is the contract with the client side
             request.body.playerId, // another contract with the client side
             request.body.playerName,
-            request.body.Hole1,
-            request.body.Hole2,
-            request.body.Hole3,
-            request.body.Hole4,
-            request.body.Hole5,
-            request.body.Hole6,
-            request.body.Hole7,
-            request.body.Hole8,
-            request.body.Hole9,
-            request.body.Hole10,
-            request.body.Hole11,
-            request.body.Hole12,
-            request.body.Hole13,
-            request.body.Hole14,
-            request.body.Hole15,
-            request.body.Hole16,
-            request.body.Hole17,
-            request.body.Hole18
+            request.body.Hole1Score,
+            request.body.Hole2Score,
+            request.body.Hole3Score,
+            request.body.Hole4Score,
+            request.body.Hole5Score,
+            request.body.Hole6Score,
+            request.body.Hole7Score,
+            request.body.Hole8Score,
+            request.body.Hole9Score,
+            request.body.Hole10Score,
+            request.body.Hole11Score,
+            request.body.Hole12Score,
+            request.body.Hole13Score,
+            request.body.Hole14Score,
+            request.body.Hole15Score,
+            request.body.Hole16Score,
+            request.body.Hole17Score,
+            request.body.Hole18Score
             // a third param with the client side
 
         ];
@@ -186,7 +186,7 @@ let createPlayer =
 let deletePlayer =
 
     function(request, response){
-        console.log ("DELETE /players/:playerId");
+        console.log ("DELETE /player/:playerId");
 
         let playerId = request.params.playerId; // because the playerId is a path param
         let sql = "DELETE FROM Players WHERE playerId = ?"
@@ -213,7 +213,7 @@ let deletePlayer =
 let updatePlayer =
 
     function(request, response){
-        console.log("PUT /players/:playerId")
+        console.log("PUT /player/:playerId")
 
 
         //this column in the table is the contract between express and the database
@@ -223,29 +223,29 @@ let updatePlayer =
             return;
         }
 
-        let sql = `UPDATE Players SET gameId = ?, playerId = ?, playerName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE playerId = ?`;
+        let sql = `UPDATE Players SET gameId = ?, playerId = ?, playerName = ?, Hole1Score = ?, Hole2Score = ?, Hole3Score = ?, Hole4Score = ?, Hole5Score = ?, Hole6Score = ?, Hole7Score = ?, Hole8Score = ?, Hole9Score = ?, Hole10Score = ?, Hole11Score = ?, Hole12Score = ?, Hole13Score = ?, Hole14Score = ?, Hole15Score = ?, Hole16Score = ?, Hole17Score = ?, Hole18Score = ? WHERE playerId = ?`;
         let params = [
             request.body.gameId, // this is the contract with the client side
             request.body.playerId, // another contract with the client side
             request.body.playerName,
-            request.body.Hole1,
-            request.body.Hole2,
-            request.body.Hole3,
-            request.body.Hole4,
-            request.body.Hole5,
-            request.body.Hole6,
-            request.body.Hole7,
-            request.body.Hole8,
-            request.body.Hole9,
-            request.body.Hole10,
-            request.body.Hole11,
-            request.body.Hole12,
-            request.body.Hole13,
-            request.body.Hole14,
-            request.body.Hole15,
-            request.body.Hole16,
-            request.body.Hole17,
-            request.body.Hole18
+            request.body.Hole1Score,
+            request.body.Hole2Score,
+            request.body.Hole3Score,
+            request.body.Hole4Score,
+            request.body.Hole5Score,
+            request.body.Hole6Score,
+            request.body.Hole7Score,
+            request.body.Hole8Score,
+            request.body.Hole9Score,
+            request.body.Hole10Score,
+            request.body.Hole11Score,
+            request.body.Hole12Score,
+            request.body.Hole13Score,
+            request.body.Hole14Score,
+            request.body.Hole15Score,
+            request.body.Hole16Score,
+            request.body.Hole17Score,
+            request.body.Hole18Score
 
         ];
 
