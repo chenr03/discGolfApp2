@@ -1,7 +1,7 @@
 let hello = function(request, response) {
 
     console.log('hello() in login controller');
-    response.send("Hello World");
+    response.send("Deployed Successfully");
 }
 
 let privateHello = function(request, response) {
