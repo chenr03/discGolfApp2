@@ -8,11 +8,11 @@ let gameController = require("../Controller/game")
 
 // These routes are for my Game Table
 
-Routes.get("/game", gameController.getAllGames)
-Routes.get("/game", gameController.getSingleGame)
+Routes.get("/games", gameController.getAllGames)
+Routes.get("/game/:gameId", gameController.getSingleGame)
 Routes.post("/game", gameController.createGame)
-Routes.delete("/game", gameController.deleteGame)
-Routes.put("/game", gameController.updateGame)
+Routes.delete("/game/:gameId", gameController.deleteGame)
+Routes.put("/game/:gameId", gameController.updateGame)
 
 
 module.exports = Routes;

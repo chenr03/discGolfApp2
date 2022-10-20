@@ -128,7 +128,7 @@ let createUser =
 let deleteUser =
 
     function(request, response) {
-        console.log("DELETE /user/:UserId")
+        console.log("DELETE /user/:userId")
 
         let userId = request.params.userId; // because the userId is a path parameter
         let sql = 'DELETE FROM Users WHERE userId = ?'

@@ -6,10 +6,10 @@ let controller = require("../Controller/players");
 
 // These routes are for my Players Table
 Routes.get("/players", controller.getAllPlayers)
-Routes.get("/players/:id", controller.getSinglePlayer);
-Routes.post('/players', controller.createPlayer);
-Routes.delete('/players/:id', controller.deletePlayer);
-Routes.put('/players/:id', controller.updatePlayer);
+Routes.get("/player/:playerId", controller.getSinglePlayer);
+Routes.post('/player', controller.createPlayer);
+Routes.delete('/player/:playerId', controller.deletePlayer);
+Routes.put('/player/:playerId', controller.updatePlayer);
 
 module.exports = Routes;
 
