@@ -11,7 +11,7 @@ let getAllCourses =
 
         // what kind of query do we send to get all the courses in the database
 
-        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Courses";
+        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Course";
 
             // GETS all courses by selecting courseId,
             // courseName, Hole1Score, Hole 2 Score, etc.
@@ -43,7 +43,7 @@ let getSingleCourse =
             return;
         }
 
-        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Courses where courseId = ?";
+        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Course where courseId = ?";
 
         let params = [courseId]
 
@@ -74,7 +74,7 @@ let createCourse =
 
 
         //these columns in the table is the contract between express and the database
-        let sql = "INSERT INTO Courses courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
+        let sql = "INSERT INTO Course courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
         let params = [
             request.body.courseId,
             request.body.courseName,
@@ -148,7 +148,7 @@ let updateCourse =
             return;
         }
 
-        let sql = "UPDATE Courses SET courseId = ?, courseName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE courseId = ?";
+        let sql = "UPDATE Course SET courseId = ?, courseName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE courseId = ?";
         let params = [
             request.body.courseId,
             request.body.courseName,

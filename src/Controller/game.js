@@ -76,7 +76,7 @@ let createGame =
         console.log("POST /game");
 
         // the column in the table is the contract between express and the database
-        let sql = "INSERT INTO Games userId, courseId, gameId, gameName VALUES (?, ?, ?, ?)";
+        let sql = "INSERT INTO Game userId, courseId, gameId, gameName VALUES (?, ?, ?, ?)";
         let params = [
             request.body.userId,
             request.body.courseId,
@@ -106,7 +106,7 @@ let deleteGame =
         console.log("DELETE /game/:gameId");
 
         let gameId = request.params.gameId; // because the gameId is a path param
-        let sql = "DELETE FROM Games WHERE gameId = ?";
+        let sql = "DELETE FROM Game WHERE gameId = ?";
         let params = [gameId];
 
         console.log("request.body", request.body);
@@ -137,7 +137,7 @@ let updateGame =
             return;
         }
 
-        let sql = "UPDATE Games SET userId = ?, courseId = ?, gameId = ?, gameName = ? WHERE gameId = ?"
+        let sql = "UPDATE Game SET userId = ?, courseId = ?, gameId = ?, gameName = ? WHERE gameId = ?"
         let params = [
             request.body.userId,
             request.body.courseId,
