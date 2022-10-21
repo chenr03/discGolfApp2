@@ -16,7 +16,7 @@ let getAllUsers =
 
             // what kind of query do we send to all the items in the database
 
-        let sql = "SELECT userId, username, passwordHash FROM Users";
+        let sql = "SELECT * FROM Users";
         // GETS all the users by selecting their userId, username, and passwordHash
 
         connection.query(sql, function(error, rows){
@@ -92,9 +92,8 @@ let createUser =
         console.log("POST /user");
 
         // the column in the table are the contract between express and the database
-        let sql = 'INSERT INTO Users (userId, username, passwordHash) VALUES (?, ?, ?)';
+        let sql = 'INSERT INTO Users (username, passwordHash) VALUES (?, ?)';
         let params = [
-            request.body.userId, // this is the contract with the client side
             request.body.username, // this is the contract with the client side
             request.body.passwordHash // another contract with the client side
 
@@ -131,7 +130,7 @@ let deleteUser =
         console.log("DELETE /user/:userId")
 
         let userId = request.params.userId; // because the userId is a path parameter
-        let sql = 'DELETE FROM Users WHERE userId = ?'
+        let sql = 'DELETE * FROM Users WHERE userId = ?'
         let params = [userId];
 
         console.log("request.body", request.body);
@@ -161,8 +160,8 @@ let updateUser =
             response.sendStatus(400)
             return;
         }
-            let sql = 'UPDATE Users SET userId = ?, username = ?, passwordHash = ?';
-            let params = [request.body.userId, request.body.username, request.body.passwordhash]
+            let sql = 'UPDATE Users SET username = ?, passwordHash = ?';
+            let params = [request.body.username, request.body.passwordhash]
 
 
 

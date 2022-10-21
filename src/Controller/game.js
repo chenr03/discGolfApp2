@@ -13,7 +13,7 @@ let getAllGames =
 
         // what kind of query do we send to get all the items in the database
 
-        let sql = "SELECT userId, courseId, gameId, gameName FROM Game";
+        let sql = "SELECT * FROM Game";
 
         //GETS all Games by selecting gameId, gameName,userId, courseId.
 
@@ -47,7 +47,7 @@ let getSingleGame =
 
         // parameterized sql statement:
 
-        let sql = "SELECT userId, courseId, gameId, gameName FROM Game WHERE gameId = ?";
+        let sql = "SELECT * FROM Game WHERE gameId = ?";
 
         let params = [gameId]
 
@@ -76,11 +76,8 @@ let createGame =
         console.log("POST /game");
 
         // the column in the table is the contract between express and the database
-        let sql = "INSERT INTO Game userId, courseId, gameId, gameName VALUES (?, ?, ?, ?)";
+        let sql = "INSERT INTO Game gameName VALUES (?)";
         let params = [
-            request.body.userId,
-            request.body.courseId,
-            request.body.gameId,
             request.body.gameName
         ];
 
@@ -137,11 +134,8 @@ let updateGame =
             return;
         }
 
-        let sql = "UPDATE Game SET userId = ?, courseId = ?, gameId = ?, gameName = ? WHERE gameId = ?"
+        let sql = "UPDATE Game SET gameName = ? WHERE gameId = ?"
         let params = [
-            request.body.userId,
-            request.body.courseId,
-            request.body.gameId,
             request.body.gameName
         ];
 

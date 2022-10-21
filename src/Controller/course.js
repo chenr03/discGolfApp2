@@ -11,7 +11,7 @@ let getAllCourses =
 
         // what kind of query do we send to get all the courses in the database
 
-        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Course";
+        let sql = "SELECT * FROM Course";
 
             // GETS all courses by selecting courseId,
             // courseName, Hole1Score, Hole 2 Score, etc.
@@ -43,7 +43,7 @@ let getSingleCourse =
             return;
         }
 
-        let sql = "SELECT courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 FROM Course where courseId = ?";
+        let sql = "SELECT * FROM Course where courseId = ?";
 
         let params = [courseId]
 
@@ -74,9 +74,8 @@ let createCourse =
 
 
         //these columns in the table is the contract between express and the database
-        let sql = "INSERT INTO Course courseId, courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
+        let sql = "INSERT INTO Course courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
         let params = [
-            request.body.courseId,
             request.body.courseName,
             request.body.Hole1,
             request.body.Hole2,
@@ -117,7 +116,7 @@ let deleteCourse =
         console.log("DELETE /course/:courseId");
 
         let courseId = request.params.courseId; // because the courseId is a path param
-        let sql = "DELETE FROM Courses WHERE courseId = ?"
+        let sql = "DELETE * FROM Courses WHERE courseId = ?"
         let params = [courseId];
 
         console.log("request.body", request.body);
@@ -148,9 +147,8 @@ let updateCourse =
             return;
         }
 
-        let sql = "UPDATE Course SET courseId = ?, courseName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE courseId = ?";
+        let sql = "UPDATE Course SET courseName = ?, Hole1 = ?, Hole2 = ?, Hole3 = ?, Hole4 = ?, Hole5 = ?, Hole6 = ?, Hole7 = ?, Hole8 = ?, Hole9 = ?, Hole10 = ?, Hole11 = ?, Hole12 = ?, Hole13 = ?, Hole14 = ?, Hole15 = ?, Hole16 = ?, Hole17 = ?, Hole18 = ? WHERE courseId = ?";
         let params = [
-            request.body.courseId,
             request.body.courseName,
             request.body.Hole1,
             request.body.Hole2,
