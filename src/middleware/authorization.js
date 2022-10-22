@@ -1,10 +1,10 @@
 let jwt = require("jsonwebtoken");
 
 let checkJWT = function(request, response, next){
-
+    let signedToken;
     let headerValue = request.get("Authorization");
         if(headerValue){
-            let parts = headerValue.split("")
+            let parts = headerValue.split(" ")
             signedToken = parts[1];
         }
 
@@ -25,7 +25,7 @@ let checkJWT = function(request, response, next){
             // then return an error code potentially a 404 or 400 or 403
         try {
             // this will either throw an error or return the unsigned token
-            let unsignedToken = jwt.verify(signedToken, process.env.JWT_SECRET);
+            let unsignedToken = jwt.verify(signedToken, process.env.JSONWEBTOKEN_SECRET);
 
             request.userInfo = unsignedToken;
             // the only way to get to this line, is if line 28 does not throw an error

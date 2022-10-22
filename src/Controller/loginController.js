@@ -6,10 +6,11 @@ let hello = function(request, response) {
 
 let privateHello = function(request, response) {
 
-    let userName = request.userInfo.fullName;
+    let userName = request.userInfo.username;
 
     console.log(`Private hello in login controller`);
     response.send(`Hello there, you are now logged in` +userName);
 }
 
 module.exports = {hello, privateHello};
+

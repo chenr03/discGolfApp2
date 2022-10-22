@@ -1,5 +1,17 @@
 notes
 
+    checkJWT - add this to my routes that need me to login in order to see my stuff.
+
+
+
+
+
+
+
+
+
+
+
 
     routes - "the rules"
         - where we define what routes our app supports
