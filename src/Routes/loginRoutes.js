@@ -12,7 +12,7 @@ let auths = require("../middleware/authorization");
 router.get("/hello", loginController.hello);
 // only requests that have a valid token are allowed in
 
-
+router.get("/admin", auths.checkJWT); //adminController.checkAdmin
 
 // GET /private hello
 router.get("/privateHello", auths.checkJWT, loginController.privateHello);

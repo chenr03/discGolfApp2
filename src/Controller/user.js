@@ -130,7 +130,7 @@ let deleteUser =
         console.log("DELETE /user/:userId")
 
         let userId = request.params.userId; // because the userId is a path parameter
-        let sql = 'DELETE * FROM Users WHERE userId = ?'
+        let sql = 'DELETE FROM Users WHERE userId = ?'
         let params = [userId];
 
         console.log("request.body", request.body);

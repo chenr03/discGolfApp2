@@ -76,7 +76,7 @@ let createGame =
         console.log("POST /game");
 
         // the column in the table is the contract between express and the database
-        let sql = "INSERT INTO Game gameName VALUES (?)";
+        let sql = "INSERT INTO Game (gameName) VALUES (?)";
         let params = [
             request.body.gameName
         ];

@@ -74,7 +74,7 @@ let createCourse =
 
 
         //these columns in the table is the contract between express and the database
-        let sql = "INSERT INTO Course courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
+        let sql = "INSERT INTO Course (courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
         let params = [
             request.body.courseName,
             request.body.Hole1,
@@ -99,7 +99,7 @@ let createCourse =
 
         connection.query(sql, params, function(error, rows){
             if(error){
-                console.log("Failed to create a course", rows);
+                console.log("Failed to create a course", error);
                 response.sendStatus(500); // our fault
             } else {
                 console.log("Course Created Successfully", rows); // created a course in the database

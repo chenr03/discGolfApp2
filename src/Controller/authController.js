@@ -11,7 +11,6 @@ let register = async function(request, response){
 
     let username = request.body.username;
     let password = request.body.password;
-    let fullName = request.body.fullName;
 
     let passwordHash;
     try{
@@ -22,8 +21,8 @@ let register = async function(request, response){
         return;
     }
 
-    let sql = 'INSERT INTO users (username, passwordHash, fullName) VALUES (?, ?, ?)';
-    let params = [username, passwordHash, fullName];
+    let sql = 'INSERT INTO Users (username, passwordHash) VALUES (?, ?)';
+    let params = [username, passwordHash];
 
     database.query(sql, params, function(error){
         if(error){
@@ -39,7 +38,7 @@ let login = function(request, response){
     let username = request.body.username
     let password = request.body.password
 
-    let sql = "SELECT id, fullName, passwordHash FROM users where username = ?"
+    let sql = "SELECT id, passwordHash FROM users where username = ?"
     let params = [username];
 
     // plain old callbacks
@@ -56,7 +55,6 @@ let login = function(request, response){
                 response.sendStatus(400); // client's fault
             } else {
                 let passwordHash = rows[0].passwordHash;
-                let fullName = rows[0].fullName;
                 let userId = rows[0].id;
 
                 let pass = false;
@@ -67,7 +65,6 @@ let login = function(request, response){
                 }
                 if (pass) {
                     let token = {
-                        "fullName": fullName,
                         "UserId": userId
                     };
 

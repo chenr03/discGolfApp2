@@ -17,6 +17,10 @@ discGolfApp.use(authRoutes);
 let loginRoutes = require("./Routes/loginRoutes")
 discGolfApp.use(loginRoutes);
 
+discGolfApp.use("/success", function(request, response){
+    response.send("Deployed Successfully")
+});
+
 
 // I will capture all the Disc Golf Routes we have
 // in one place, instead of defining the Routes directly

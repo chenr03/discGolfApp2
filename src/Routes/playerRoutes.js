@@ -1,6 +1,6 @@
 let express = require('express');
 
-let Routes = express.Router()
+let Routes = express.Router();
 
 let controller = require("../Controller/players");
 
