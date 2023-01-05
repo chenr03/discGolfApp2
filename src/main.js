@@ -8,18 +8,23 @@ let discGolfApp = express();
 
 
 
+
+
+// Packages that are being used on the discGolfApp:
 discGolfApp.use(express.json());
 discGolfApp.use(express.static("./discGolfApp2/public"));
 
+
+// Authorization Routes and Login Routes that are being used on the discGolfApp:
 let authRoutes = require("./Routes/authorizationRoutes")
 discGolfApp.use(authRoutes);
 
 let loginRoutes = require("./Routes/loginRoutes")
 discGolfApp.use(loginRoutes);
 
-discGolfApp.use("/success", function(request, response){
-    response.send("Deployed Successfully")
-});
+// discGolfApp.use("/success", function(request, response){
+//     response.send("Deployed Successfully")
+// });
 
 
 // I will capture all the Disc Golf Routes we have

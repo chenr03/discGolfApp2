@@ -74,7 +74,10 @@ let createCourse =
 
 
         //these columns in the table is the contract between express and the database
-        let sql = "INSERT INTO Course (courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; //inserts into courses object table
+        let sql = `INSERT INTO Course 
+                    (courseName, Hole1, Hole2, Hole3, Hole4, Hole5, Hole6, Hole7, Hole8, Hole9, Hole10, 
+                     Hole11, Hole12, Hole13, Hole14, Hole15, Hole16, Hole17, Hole18) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`; //inserts into courses object table
         let params = [
             request.body.courseName,
             request.body.Hole1,
@@ -116,7 +119,7 @@ let deleteCourse =
         console.log("DELETE /course/:courseId");
 
         let courseId = request.params.courseId; // because the courseId is a path param
-        let sql = "DELETE * FROM Courses WHERE courseId = ?"
+        let sql = "DELETE FROM Course WHERE courseId = ?"
         let params = [courseId];
 
         console.log("request.body", request.body);
@@ -167,7 +170,8 @@ let updateCourse =
             request.body.Hole15,
             request.body.Hole16,
             request.body.Hole17,
-            request.body.Hole18
+            request.body.Hole18,
+            courseId
         ];
 
         connection.query(sql, params, function(error, rows){

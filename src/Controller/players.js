@@ -129,7 +129,7 @@ let createPlayer =
 
 
         // the colum in the table are the contract between express and the database
-        let sql = "INSERT INTO Players (gameId, playerName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// inserts player object table
+        let sql = "INSERT INTO Players (gameId, playerName, Hole1Score, Hole2Score, Hole3Score, Hole4Score, Hole5Score, Hole6Score, Hole7Score, Hole8Score, Hole9Score, Hole10Score, Hole11Score, Hole12Score, Hole13Score, Hole14Score, Hole15Score, Hole16Score, Hole17Score, Hole18Score) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";// inserts player object table
         let params = [
             request.body.gameId, // this is the contract with the client side
             request.body.playerName,
@@ -222,10 +222,11 @@ let updatePlayer =
             return;
         }
 
-        let sql = `UPDATE Players SET gameId = ?, playerId = ?, playerName = ?, Hole1Score = ?, Hole2Score = ?, Hole3Score = ?, Hole4Score = ?, Hole5Score = ?, Hole6Score = ?, Hole7Score = ?, Hole8Score = ?, Hole9Score = ?, Hole10Score = ?, Hole11Score = ?, Hole12Score = ?, Hole13Score = ?, Hole14Score = ?, Hole15Score = ?, Hole16Score = ?, Hole17Score = ?, Hole18Score = ? WHERE playerId = ?`;
+        let sql = `UPDATE Players SET gameId = ?, playerName = ?, Hole1Score = ?, Hole2Score = ?, Hole3Score = ?, Hole4Score = ?, Hole5Score = ?, Hole6Score = ?, Hole7Score = ?, Hole8Score = ?, Hole9Score = ?, Hole10Score = ?, Hole11Score = ?, Hole12Score = ?, Hole13Score = ?, Hole14Score = ?, Hole15Score = ?, Hole16Score = ?, Hole17Score = ?, Hole18Score = ? WHERE playerId = ?`;
         let params = [
-            request.body.gameId, // this is the contract with the client side
-            request.body.playerId, // another contract with the client side
+            request.body.gameId,
+            // this is the contract with the client side
+            // another contract with the client side
             request.body.playerName,
             request.body.Hole1Score,
             request.body.Hole2Score,
@@ -244,7 +245,8 @@ let updatePlayer =
             request.body.Hole15Score,
             request.body.Hole16Score,
             request.body.Hole17Score,
-            request.body.Hole18Score
+            request.body.Hole18Score,
+            playerId
 
         ];
 

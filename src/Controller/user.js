@@ -1,4 +1,5 @@
 let connection = require("../Utilities/database")
+let argon2 = require(`argon2`);
 // console.log(connection);
 
 // this function takes in a request and a response object
@@ -10,7 +11,7 @@ let connection = require("../Utilities/database")
 let getAllUsers =
 
     function(request, response){
-        console.log("GET /users")
+        console.log("GET/Users")
 
             // lets user see what's inside the users array
 
@@ -38,11 +39,13 @@ let getSingleUser =
     // to get a single user from the database if we know the id
 
     function(request, response){
-        console.log("GET /user/:userId");
+        console.log("GET/User/:userId");
+
+        let userId = request.params.userId;
+        console.log("Request Params: ", request.params)
 
         // this is bad should not do this
 
-        let userId = request.params.id;
 
         if(!userId) {
             response.send(400); // this is the clients fault resulting in 400 error code.
@@ -64,8 +67,10 @@ let getSingleUser =
                     console.log("returned more than 1 row for userId", userId);
                     response.sendStatus(500);
                 } else if (rows.length ===0){
+                    console.log('No Rows', null)
                     response.json(null);
                 } else {
+                    console.log('normal rows affected: ', rows[0])
                     response.json(rows[0]);
                 }
             }
@@ -88,14 +93,16 @@ let getSingleUser =
 
 let createUser =
 
-    function(request, response){
-        console.log("POST /user");
+    async function(request, response){
+        console.log("POST/User");
+        let hash = await argon2.hash(request.body.passwordHash);
+        console.log('hash: ', hash)
 
         // the column in the table are the contract between express and the database
         let sql = 'INSERT INTO Users (username, passwordHash) VALUES (?, ?)';
         let params = [
             request.body.username, // this is the contract with the client side
-            request.body.passwordHash // another contract with the client side
+            hash // another contract with the client side
 
         ];
 
@@ -127,9 +134,13 @@ let createUser =
 let deleteUser =
 
     function(request, response) {
-        console.log("DELETE /user/:userId")
+        console.log("DELETE/User/:userId")
 
         let userId = request.params.userId; // because the userId is a path parameter
+        console.log('UserInfo: ', request.userInfo)
+        if (request.userInfo.userId == userId) {
+
+
         let sql = 'DELETE FROM Users WHERE userId = ?'
         let params = [userId];
 
@@ -144,6 +155,11 @@ let deleteUser =
                 response.json(rows);
             }
         });
+
+        } else {
+            console.log('You are not Authorized to Delete this User! ')
+            response.sendStatus(401)
+        }
     };
 
 // which query type do we need to do to update a user?
@@ -151,7 +167,7 @@ let deleteUser =
 let updateUser =
 
     function(request, response){
-        console.log("PUT / user/:userId")
+        console.log("PUT/User/:userId")
 
 
         // this column in the table is the contract between express and the database
@@ -160,8 +176,8 @@ let updateUser =
             response.sendStatus(400)
             return;
         }
-            let sql = 'UPDATE Users SET username = ?, passwordHash = ?';
-            let params = [request.body.username, request.body.passwordhash]
+            let sql = 'UPDATE Users SET username = ?, passwordHash = ? WHERE userId = ?';
+            let params = [request.body.username, request.body.passwordHash, userId]
 
 
 

@@ -76,9 +76,12 @@ let createGame =
         console.log("POST /game");
 
         // the column in the table is the contract between express and the database
-        let sql = "INSERT INTO Game (gameName) VALUES (?)";
+        let sql = "INSERT INTO Game (gameName, courseId, userId) VALUES (?, ?, ?)";
         let params = [
-            request.body.gameName
+            request.body.gameName,
+            request.body.courseId,
+            request.userInfo.userId
+
         ];
 
         connection.query(sql, params, function(error, rows){
@@ -134,9 +137,14 @@ let updateGame =
             return;
         }
 
-        let sql = "UPDATE Game SET gameName = ? WHERE gameId = ?"
+        let sql = "UPDATE Game SET gameName = ?, userId = ?, courseId = ? WHERE gameId = ?"
         let params = [
-            request.body.gameName
+            request.body.gameName,
+            request.userInfo.userId,
+            request.body.courseId,
+            gameId,
+
+
         ];
 
         connection.query(sql, params, function(error, rows){

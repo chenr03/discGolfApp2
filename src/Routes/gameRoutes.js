@@ -3,6 +3,8 @@ let express = require('express');
 
 let Routes = express.Router()
 
+let { checkJWT } = require('../middleware/authorization')
+
 
 let gameController = require("../Controller/game")
 
@@ -10,9 +12,9 @@ let gameController = require("../Controller/game")
 
 Routes.get("/games", gameController.getAllGames)
 Routes.get("/game/:gameId", gameController.getSingleGame)
-Routes.post("/game", gameController.createGame)
-Routes.delete("/game/:gameId", gameController.deleteGame)
-Routes.put("/game/:gameId", gameController.updateGame)
+Routes.post("/game", checkJWT, gameController.createGame)
+Routes.delete("/game/:gameId", checkJWT, gameController.deleteGame)
+Routes.put("/game/:gameId", checkJWT, gameController.updateGame)
 
 
 module.exports = Routes;

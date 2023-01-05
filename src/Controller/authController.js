@@ -10,7 +10,7 @@ let argon2 = require("argon2");
 let register = async function(request, response){
 
     let username = request.body.username;
-    let password = request.body.password;
+    let password = request.body.passwordHash;
 
     let passwordHash;
     try{
@@ -36,7 +36,7 @@ let register = async function(request, response){
 
 let login = function(request, response){
     let username = request.body.username
-    let password = request.body.password
+    let password = request.body.passwordHash
 
     let sql = "SELECT userId, passwordHash FROM Users where username = ?"
     let params = [username];
@@ -55,7 +55,7 @@ let login = function(request, response){
                 response.sendStatus(400); // client's fault
             } else {
                 let passwordHash = rows[0].passwordHash;
-                let userId = rows[0].id;
+                let userId = rows[0].userId;
 
                 let pass = false;
                 try {
